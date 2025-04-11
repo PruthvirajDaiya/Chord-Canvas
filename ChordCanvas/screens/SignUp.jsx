@@ -17,10 +17,10 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const SignUp = ({ navigation }) => { // Add navigation prop
   const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('ikigai');
+  const [password, setPassword] = useState('passwordikigai');
   const [confirmpassword, setConfirmPassword] = useState('');
-  const [fontLoaded, setFontLoaded] = useState(false);``
+  const [fontLoaded, setFontLoaded] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   useEffect(() => {
@@ -37,6 +37,28 @@ const SignUp = ({ navigation }) => { // Add navigation prop
     console.log('Sign Up attempted with:', { email, username, password, confirmpassword});
     navigation.navigate('Login');
   };
+
+  const signUp = () => {
+    console.log("Sign Up Function Called!");
+    fetch('http://localhost:5000/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+        email: email
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Response from server:', data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }
 
   // const skipToMain = () => {
   //   // Navigate to MainScreen on button press
@@ -131,7 +153,7 @@ const SignUp = ({ navigation }) => { // Add navigation prop
               />
             </TouchableOpacity>
           </View>
-          <TouchableOpacity style={styles.signUpButton} onPress={handleSignUp}>
+          <TouchableOpacity style={styles.signUpButton} onPress={() => {handleSignUp(); signUp();}}>
             <Text style={styles.signUpButtonText}>Sign Up</Text>
           </TouchableOpacity>
           {/* <TouchableOpacity style={styles.signUpButton} onPress={handleLogin}>

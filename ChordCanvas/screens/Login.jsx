@@ -40,6 +40,33 @@ const Login = ({ navigation }) => { // Add navigation prop
     navigation.navigate('SignUp');
   };
 
+  const LogIN = () => {
+    console.log("Login Function Called!");
+    fetch('http://localhost:5000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: email,  // Using the email field as the username
+        password: password,
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Response from server:', data);
+      // If login is successful, navigate to MainScreen
+      if (data.txt === "success login") {
+        navigation.navigate('MainScreen');
+      } else {
+        console.log("Login failed");
+        // You can add code to show an error message here
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }
 
   const skipToMain = () => {
     // Navigate to MainScreen on button press
@@ -99,7 +126,7 @@ const Login = ({ navigation }) => { // Add navigation prop
               />
             </TouchableOpacity>
           </View>
-          <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
+          <TouchableOpacity style={styles.loginButton} onPress={LogIN}>
             <Text style={styles.loginButtonText}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.signUpButton} onPress={goToSignUp}>
