@@ -6,7 +6,7 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
-  // DrawerLayoutAndroid,
+  DrawerLayoutAndroid,
   Modal,
   // BackHandler
 } from 'react-native';
@@ -22,7 +22,7 @@ const MainScreen = ({navigation}) => {
   const [fontLoaded, setFontLoaded] = useState(false);
   const [selected, setSelected] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false); // Added: State for modal visibility
-  // const drawer = useRef(null);
+  const drawer = useRef(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const scaleData = [
@@ -46,12 +46,12 @@ const MainScreen = ({navigation}) => {
     Zain: require('../assets/fonts/Zain-Regular.ttf'),
   });
 
-  // // Added: Close drawer when the app mounts (i.e., on reopen)
-  // useEffect(() => {
-  //   if (drawer.current) {
-  //     drawer.current.closeDrawer();
-  //   }
-  // }, []); // Empty dependency array ensures this runs only on mount
+  // Added: Close drawer when the app mounts (i.e., on reopen)
+  useEffect(() => {
+    if (drawer.current) {
+      drawer.current.closeDrawer();
+    }
+  }, []); // Empty dependency array ensures this runs only on mount
 
   useEffect(() => {
     if (fontsLoaded) {
@@ -66,20 +66,20 @@ const MainScreen = ({navigation}) => {
     setInputText(clampedValue.toString());
   };
 
-  // const navigationView = () => (
-  //   <View style={styles.navigationContainer}>
-  //     <Text style={styles.navigationTitle}>Chord Canvas</Text>
-  //     <TouchableOpacity style={styles.navigationItemContainer} onPress={() => drawer.current.closeDrawer()}>
-  //       <Text style={styles.navigationItemText}>Saved</Text>
-  //     </TouchableOpacity>
-  //     <TouchableOpacity style={styles.navigationItemContainer} onPress={goToLogin}>
-  //       <Text style={styles.navigationItemText}>Log Out</Text>
-  //     </TouchableOpacity>
-  //     <TouchableOpacity style={styles.navigationItemContainer} onPress={handleExit}>
-  //       <Text style={styles.navigationItemText}>Exit</Text>
-  //     </TouchableOpacity>
-  //   </View>
-  // );
+  const navigationView = () => (
+    <View style={styles.navigationContainer}>
+      <Text style={styles.navigationTitle}>Chord Canvas</Text>
+      <TouchableOpacity style={styles.navigationItemContainer} onPress={() => drawer.current.closeDrawer()}>
+        <Text style={styles.navigationItemText}>Saved</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.navigationItemContainer} onPress={goToLogin}>
+        <Text style={styles.navigationItemText}>Log Out</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.navigationItemContainer}>
+        <Text style={styles.navigationItemText}>Exit</Text>
+      </TouchableOpacity>
+    </View>
+  );
 
   const goToLogin = () => {
     navigation.navigate('Login');
@@ -110,12 +110,12 @@ const MainScreen = ({navigation}) => {
   }
 
   return (
-      // <DrawerLayoutAndroid
-      //   ref={drawer}
-      //   drawerWidth={250}
-      //   drawerPosition="left"
-      //   renderNavigationView={navigationView}
-      // >
+      <DrawerLayoutAndroid
+        ref={drawer}
+        drawerWidth={250}
+        drawerPosition="left"
+        renderNavigationView={navigationView}
+      >
         
         <ImageBackground
           source={require('../assets/chord-canvas-images/piano.jpg')}
@@ -204,17 +204,26 @@ const MainScreen = ({navigation}) => {
               </View>
             </View>
 
-              <View style={styles.generateAndSaveButtonContainer}>
-                <TouchableOpacity>
-                  <View style={styles.generateButton}>
-                    <Text style={styles.generateText}>GENERATE</Text>
-                  </View>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => setIsModalVisible(true)}>
+              <View style={styles.mainButtonsContainer}>
+                {/* <View styles={styles.playAndGenerateButton}> */}
+                  <TouchableOpacity>
+                    <View style={styles.generateButton}>
+                      <Text style={styles.generateText}>GENERATE</Text>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <View style={styles.playButton}>
+                      <Text style={styles.playText}>PLAY</Text>
+                    </View>
+                  </TouchableOpacity>
+                {/* </View> */}
+              <View style={styles.saveButtonContainer}>
+                  <TouchableOpacity onPress={() => setIsModalVisible(true)}>
                   <View style={styles.saveButton}>
                     <Text style={styles.saveText}>SAVE</Text>
                   </View>
                 </TouchableOpacity>
+              </View>
               </View>
 
               <Modal
@@ -247,7 +256,7 @@ const MainScreen = ({navigation}) => {
               
           </View>
         </ImageBackground>
-      // </DrawerLayoutAndroid>
+    </DrawerLayoutAndroid>
   );
 };
 
@@ -274,7 +283,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 30,
     fontFamily: 'Pacifico',
-    color: '#211816',
+    color: '#DDA853',
     marginLeft: 10,
     paddingLeft: 45,
   },
@@ -288,7 +297,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10,
-    backgroundColor: 'rgba(212, 212, 212, 0.34)',
+    backgroundColor: 'rgba(212, 212, 212, 0.5)',
     flexDirection: 'row',
     marginHorizontal: 10,
     paddingTop: 10,
@@ -298,14 +307,14 @@ const styles = StyleSheet.create({
     fontFamily: 'Pacifico',
     fontSize: 30,
     position: 'relative',
-    color: '#211816',
+    color: 'white',
   },
   chordsContainer: {
     paddingVertical: 15,
     justifyContent: 'center',
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
-    backgroundColor: 'rgba(212, 212, 212, 0.34)',
+    backgroundColor: 'rgba(212, 212, 212, 0.5)',
     flexDirection: 'row',
     marginHorizontal: 10,
   },
@@ -353,7 +362,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   tempoAndScaleContainer: {
-    marginTop: 10,
+    marginTop: 5,
     flexDirection: 'row',
     height: '130',
     marginHorizontal: '10',
@@ -420,7 +429,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(221, 168, 83, 0.89)',
     marginTop: 2,
     width: '60%',
-    height:'85%'
+    height:'65%'
   },
   selectItem: {
     padding: 10,
@@ -430,27 +439,42 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'Zain',
   },
-  generateAndSaveButtonContainer: {
+  mainButtonsContainer: {
     // backgroundColor:'blue',
     flexDirection:'row',
-    height: '60',
+    height: '70',
     // alignItems: 'center',
     // alignContent: 'center',
-    marginTop: 100,
+    marginTop: 50,
     marginBottom: 30,
-    marginLeft: 20,
-    marginRight: 20,
+    padding:5
+  },
+  playAndGenerateButton:{
+    flexDirection:'column'
+  },
+  playButton:{
+    backgroundColor: 'rgba(26, 42, 58, 1)',
+    justifyContent: 'center',
+    width: 100,
+    height: 35,
+    alignContent: 'center',
+    marginTop: 10,
+    marginLeft:5,
+    borderRadius: 20,
+    marginBottom: 20,
+    borderStyle:'solid',
+    borderColor:'white',
+    borderWidth:3,
   },
   generateButton: {
     backgroundColor: 'rgba(26, 42, 58, 1)',
     justifyContent: 'center',
-    width: 150,
-    height: 40,
+    width: 140,
+    height: 35,
     alignContent: 'center',
     marginTop: 10,
-    marginLeft:10,
     borderRadius: 20,
-    marginBottom: 20,
+    marginBottom: 25,
     borderStyle:'solid',
     borderColor:'white',
     borderWidth:3,
@@ -459,10 +483,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(26, 42, 58, 1)',
     justifyContent: 'center',
     width: 100,
-    height: 40,
+    height: 35,
     alignContent: 'center',
     marginTop: 10,
-    marginLeft:35,
     borderRadius: 20,
     marginBottom: 20,
     borderStyle:'solid',
@@ -474,7 +497,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'white',
     fontFamily: 'Montserrat_800ExtraBold',
-    fontSize: 19,
+    fontSize: 17,
+    paddingBottom:5,
+  },
+  playText: {
+    paddingTop:3,
+    textAlign: 'center',
+    color: 'white',
+    fontFamily: 'Montserrat_800ExtraBold',
+    fontSize: 17,
     paddingBottom:5,
   },
   saveText: {
@@ -482,7 +513,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'white',
     fontFamily: 'Montserrat_800ExtraBold',
-    fontSize: 19,
+    fontSize: 17,
     paddingBottom:5,
   },
   navigationContainer: {
