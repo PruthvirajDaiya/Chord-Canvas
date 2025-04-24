@@ -1,0 +1,33 @@
+
+      {/* Tempo and Key Section */}
+      <View style={styles.settingsContainer}>
+        <View style={styles.settingBox}>
+          <Text style={styles.settingLabel}>TEMPO</Text>
+          <Text style={styles.settingValue}>128</Text>
+          <Slider
+            style={styles.slider}
+            minimumValue={60}
+            maximumValue={200}
+            value={128}
+            minimumTrackTintColor="#D4AF37"
+            maximumTrackTintColor="#555"
+            thumbTintColor="#D4AF37"
+          />
+        </View>
+        <View style={styles.settingBox}>
+          <Text style={styles.settingLabel}>KEY</Text>
+          <Text style={styles.settingValue}>Cm</Text>
+        </View>
+      </View>
+
+      {/* Style Section */}
+      <View style={styles.styleContainer}>
+        <Text style={styles.settingLabel}>STYLE</Text>
+        <Text style={styles.settingValue}>DANCE</Text>
+      </View>
+
+      {/* Save to Files Button */}
+      <TouchableOpacity style={styles.saveButton}>
+        <Text style={styles.saveButtonText}>SAVE TO FILES</Text>
+      </TouchableOpacity>
+    </View>
