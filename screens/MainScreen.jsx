@@ -38,6 +38,18 @@ const MainScreen = ({navigation}) => {
     { key: '10', value: 'A Major' },
     { key: '11', value: 'A# Major' },
     { key: '12', value: 'B Major' },
+    { key: '13', value: 'C Minor' },
+    { key: '14', value: 'C# Minor' },
+    { key: '15', value: 'D Minor' },
+    { key: '16', value: 'D# Minor' },
+    { key: '17', value: 'E Minor' },
+    { key: '18', value: 'F Minor' },
+    { key: '19', value: 'F# Minor' },
+    { key: '20', value: 'G Minor' },
+    { key: '21', value: 'G# Minor' },
+    { key: '22', value: 'A Minor' },
+    { key: '23', value: 'A# Minor' },
+    { key: '24', value: 'B Minor' },
   ];
 
   const [fontsLoaded] = useFonts({
@@ -359,7 +371,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   tempoAndScaleContainer: {
-    marginTop: 5,
+    marginTop: 3,
     flexDirection: 'row',
     height: '130',
     marginHorizontal: '10',
@@ -426,7 +438,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(221, 168, 83, 0.89)',
     marginTop: 2,
     width: '60%',
-    height:'65%'
+    height:'70%'
   },
   selectItem: {
     padding: 10,
@@ -442,7 +454,7 @@ const styles = StyleSheet.create({
     height: '70',
     // alignItems: 'center',
     // alignContent: 'center',
-    marginTop: 50,
+    marginTop: 60,
     marginBottom: 30,
     padding:5
   },
