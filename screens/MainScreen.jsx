@@ -6,9 +6,9 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
-  DrawerLayoutAndroid,
+  // DrawerLayoutAndroid,
   Modal,
-  BackHandler
+  // BackHandler
 } from 'react-native';
 import Slider from '@react-native-community/slider';
 import * as Font from 'expo-font';
@@ -22,7 +22,7 @@ const MainScreen = ({navigation}) => {
   const [fontLoaded, setFontLoaded] = useState(false);
   const [selected, setSelected] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false); // Added: State for modal visibility
-  const drawer = useRef(null);
+  // const drawer = useRef(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const scaleData = [
@@ -46,12 +46,12 @@ const MainScreen = ({navigation}) => {
     Zain: require('../assets/fonts/Zain-Regular.ttf'),
   });
 
-  // Added: Close drawer when the app mounts (i.e., on reopen)
-  useEffect(() => {
-    if (drawer.current) {
-      drawer.current.closeDrawer();
-    }
-  }, []); // Empty dependency array ensures this runs only on mount
+  // // Added: Close drawer when the app mounts (i.e., on reopen)
+  // useEffect(() => {
+  //   if (drawer.current) {
+  //     drawer.current.closeDrawer();
+  //   }
+  // }, []); // Empty dependency array ensures this runs only on mount
 
   useEffect(() => {
     if (fontsLoaded) {
@@ -66,24 +66,20 @@ const MainScreen = ({navigation}) => {
     setInputText(clampedValue.toString());
   };
 
-  const navigationView = () => (
-    <View style={styles.navigationContainer}>
-      <Text style={styles.navigationTitle}>Chord Canvas</Text>
-      <TouchableOpacity style={styles.navigationItemContainer} onPress={() => drawer.current.closeDrawer()}>
-        <Text style={styles.navigationItemText}>Saved</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.navigationItemContainer} onPress={goToLogin}>
-        <Text style={styles.navigationItemText}>Log Out</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.navigationItemContainer} onPress={handleExit}>
-        <Text style={styles.navigationItemText}>Exit</Text>
-      </TouchableOpacity>
-    </View>
-  );
-
-  const handleExit = () => {
-    BackHandler.exitApp(); // Exits the app on Android; on iOS, it will just close the drawer
-  };
+  // const navigationView = () => (
+  //   <View style={styles.navigationContainer}>
+  //     <Text style={styles.navigationTitle}>Chord Canvas</Text>
+  //     <TouchableOpacity style={styles.navigationItemContainer} onPress={() => drawer.current.closeDrawer()}>
+  //       <Text style={styles.navigationItemText}>Saved</Text>
+  //     </TouchableOpacity>
+  //     <TouchableOpacity style={styles.navigationItemContainer} onPress={goToLogin}>
+  //       <Text style={styles.navigationItemText}>Log Out</Text>
+  //     </TouchableOpacity>
+  //     <TouchableOpacity style={styles.navigationItemContainer} onPress={handleExit}>
+  //       <Text style={styles.navigationItemText}>Exit</Text>
+  //     </TouchableOpacity>
+  //   </View>
+  // );
 
   const goToLogin = () => {
     navigation.navigate('Login');
@@ -114,12 +110,12 @@ const MainScreen = ({navigation}) => {
   }
 
   return (
-      <DrawerLayoutAndroid
-        ref={drawer}
-        drawerWidth={250}
-        drawerPosition="left"
-        renderNavigationView={navigationView}
-      >
+      // <DrawerLayoutAndroid
+      //   ref={drawer}
+      //   drawerWidth={250}
+      //   drawerPosition="left"
+      //   renderNavigationView={navigationView}
+      // >
         
         <ImageBackground
           source={require('../assets/chord-canvas-images/piano.jpg')}
@@ -251,7 +247,7 @@ const MainScreen = ({navigation}) => {
               
           </View>
         </ImageBackground>
-      </DrawerLayoutAndroid>
+      // </DrawerLayoutAndroid>
   );
 };
 
