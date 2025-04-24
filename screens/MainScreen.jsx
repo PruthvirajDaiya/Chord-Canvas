@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   DrawerLayoutAndroid,
   Modal,
-  // BackHandler
+  BackHandler
 } from 'react-native';
 import Slider from '@react-native-community/slider';
 import * as Font from 'expo-font';
@@ -74,9 +74,6 @@ const MainScreen = ({navigation}) => {
       </TouchableOpacity>
       <TouchableOpacity style={styles.navigationItemContainer} onPress={goToLogin}>
         <Text style={styles.navigationItemText}>Log Out</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.navigationItemContainer}>
-        <Text style={styles.navigationItemText}>Exit</Text>
       </TouchableOpacity>
     </View>
   );
